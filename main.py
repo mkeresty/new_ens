@@ -24,7 +24,7 @@ open('firebase.json')
 cred = credentials.Certificate('firebase.json')
 
 
-databaseurl = "https://ens-master-default-rtdb.firebaseio.com/"
+databaseurl = ""
 
 firebase_admin.initialize_app(cred, {'databaseURL': databaseurl})
 
@@ -32,13 +32,6 @@ def wl(tokenid, name, epoch_time, ftime):
   ref = db.reference(f"/")
   ref.update({tokenid:{'epoch':epoch_time, 'timestamp': ftime, "name": name}})
   return
-
-
-def readfire(user):
-  ref = db.reference(user)
-  x = ref.get()
-  #print(x)
-  return(x)
 
 
 def getDate(tokenid, name):
@@ -83,8 +76,6 @@ def getToken(ensName):
     getDate(b, name)
 
     return(b)
-
-#getToken('136')
 
 
 for i in range(5000,7500):
