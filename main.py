@@ -36,21 +36,16 @@ def wl(tokenid, name, epoch_time, ftime):
 
 def getDate(tokenid, name):
 
-  epoch_time="1234567"
-  ftime="nulltime"
+  epoch_time = "1234567"
+  ftime = "nulltime"
   
   response = requests.get('https://metadata.ens.domains/mainnet/0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85/' + str(tokenid))
   jresp = response.json()
-
-  #print(jresp)
-
 
   if "attributes" in jresp:
     epoch_time=jresp['attributes'][3]['value']
     epoch_time = int(epoch_time)/1000
 
-
-  #date_time = datetime.datetime.fromtimestamp( epoch_time )
     ftime = time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.localtime(epoch_time))
     ftime = str(ftime)
 
@@ -65,13 +60,11 @@ def getToken(ensName):
 
     k = sha3.keccak_256()
     k.update(str_1_encoded)
-    j =k.hexdigest()
-
-    #print(j)
+    j = k.hexdigest()
 
     b = int(j,16)
 
-    name=str(ensName) + '.eth'
+    name = str(ensName) + '.eth'
 
     getDate(b, name)
 
